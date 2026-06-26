@@ -1,4 +1,4 @@
-import { ArrowRight, GitBranch, Link, Mail } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram, FaYoutubeSquare } from 'react-icons/fa'
 import { GrContact } from 'react-icons/gr'
 import { ProjectShowcase } from "@/components/project-showcase";
@@ -18,6 +18,7 @@ import { FAQ } from "@/components/faq";
 import { Reviews } from "@/components/reviews";
 import { HeroMetrics } from "@/components/hero-metrics";
 import { ResponsiveNav } from "@/components/responsive-nav";
+import { buildStructuredData, jsonLd } from "@/lib/seo";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
@@ -73,9 +74,17 @@ async function getServices() {
 
 export default async function Home() {
   const [projects, services] = await Promise.all([getProjects(), getServices()]);
+  const structuredData = buildStructuredData();
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#0D1117] text-white selection:bg-emerald-400 selection:text-slate-950">
+      {structuredData.map((data, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd(data)}
+        />
+      ))}
       <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-[#0D1117]/80 backdrop-blur-xl">
         <ResponsiveNav />
       </header>

@@ -54,13 +54,7 @@ export function VideoLightbox() {
               </button>
             </div>
             <div className="aspect-video">
-              <iframe
-                className="h-full w-full"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-                title="Technical walkthrough"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/qOTEK-VsYI0?si=aZ9UlsuDDA-aHVDj" title="Just a Place holder song"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
             </div>
           </div>
         </div>
