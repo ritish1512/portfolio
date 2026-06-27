@@ -164,6 +164,7 @@ export function Reviews() {
                 id="name"
                 name="name"
                 required
+                aria-label='Enter your name'
                 placeholder="John Doe"
                 className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-emerald-400 focus:ring-4 focus:ring-emerald-400/10 sm:text-base sm:px-5 sm:py-4"
                 suppressHydrationWarning
@@ -179,6 +180,7 @@ export function Reviews() {
                 name="email"
                 type="email"
                 required
+                aria-label='Enter your email'
                 placeholder="john@example.com"
                 className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-emerald-400 focus:ring-4 focus:ring-emerald-400/10 sm:text-base sm:px-5 sm:py-4"
                 suppressHydrationWarning
@@ -193,15 +195,16 @@ export function Reviews() {
                 id="rating"
                 name="rating"
                 required
+                aria-label='Ratings'
                 defaultValue="5"
                 className="mt-2 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition focus:border-emerald-400 focus:ring-4 focus:ring-emerald-400/10 sm:text-base sm:px-5 sm:py-4"
                 suppressHydrationWarning
               >
-                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
-                <option value="4">⭐⭐⭐⭐ Good</option>
-                <option value="3">⭐⭐⭐ Average</option>
-                <option value="2">⭐⭐ Fair</option>
-                <option value="1">⭐ Poor</option>
+                <option value="5" aria-label='5stars'>⭐⭐⭐⭐⭐ Excellent</option>
+                <option value="4" aria-label='4stars'>⭐⭐⭐⭐ Good</option>
+                <option value="3" aria-label='3stars'>⭐⭐⭐ Average</option>
+                <option value="2" aria-label='2stars'>⭐⭐ Fair</option>
+                <option value="1" aria-label='1star'>⭐ Poor</option>
               </select>
             </div>
 
@@ -215,6 +218,7 @@ export function Reviews() {
                 required
                 minLength={10}
                 maxLength={500}
+                aria-label='Enter your Review'
                 placeholder="Share your experience..."
                 className="mt-2 min-h-28 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-emerald-400 focus:ring-4 focus:ring-emerald-400/10 sm:text-base sm:px-5 sm:py-4"
                 suppressHydrationWarning
@@ -224,6 +228,7 @@ export function Reviews() {
             <button
               type="submit"
               disabled={submitting}
+              aria-label='Submit review'
               className="w-full rounded-xl bg-emerald-500 px-5 py-3 text-sm font-bold text-slate-950 transition disabled:opacity-50 hover:bg-emerald-400 sm:px-6 sm:py-4 sm:text-base"
               suppressHydrationWarning
             >

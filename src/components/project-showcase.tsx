@@ -1,18 +1,27 @@
 "use client";
 
 import { Check, ChevronLeft, ChevronRight } from "lucide-react";
-import { UIEvent, useState } from "react";
+import { UIEvent, useState, useEffect } from "react";
 import type { Project } from "./portfolio-data";
+import Image from "next/image";
 
 export function ProjectShowcase({ projects }: { projects: Project[] }) {
   const [activeProject, setActiveProject] = useState(0);
+  const [showSwipeHint, setShowSwipeHint] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const project = projects[activeProject] ?? projects[0];
+
+  useEffect(() => {
+    setIsMounted(true);
+    setShowSwipeHint(true);
+  }, []);
 
   function cycleProject(direction: number) {
     setActiveProject((current) => (current + direction + projects.length) % projects.length);
   }
 
   function onProjectMobileScroll(event: UIEvent<HTMLDivElement>) {
+    setShowSwipeHint(false);
     const node = event.currentTarget;
     const nextIndex = Math.round(node.scrollLeft / Math.max(node.clientWidth * 0.88, 1));
     if (nextIndex !== activeProject && projects[nextIndex]) setActiveProject(nextIndex);
@@ -70,10 +79,14 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
 
         <div>
           <div className="group relative aspect-[1.55] overflow-hidden rounded-3xl bg-slate-900">
-            <img
+            <Image
               src={project.image}
               alt={project.title}
+              width={1200}
+              height={675}
               className="h-full w-full object-cover opacity-75 transition duration-500 group-hover:scale-105"
+              loading="eager"
+              unoptimized
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-8">
@@ -85,6 +98,7 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
             {projects.map((item, index) => (
               <button
                 key={item._id}
+                aria-label={item.title}
                 onClick={() => setActiveProject(index)}
                 className={`h-24 w-36 overflow-hidden rounded-lg border transition ${
                   index === activeProject
@@ -93,7 +107,7 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
                 } sm:h-28 sm:w-44`}
                 suppressHydrationWarning
               >
-                <img src={item.image} alt="" className="h-full w-full object-cover" />
+              <Image src={item.image} alt={item.title} width={400} height={225} className="h-full w-full object-cover" loading="lazy" unoptimized/>
               </button>
             ))}
           </div>
@@ -123,7 +137,7 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
               key={item._id}
               className="w-[88vw] shrink-0 snap-center overflow-hidden rounded-3xl border border-white/10 bg-slate-900"
             >
-              <img src={item.image} alt={item.title} className="h-72 w-full object-cover" />
+              <Image src={item.image} width={800} height={400} alt={item.title} className="h-72 w-full object-cover" loading="lazy" unoptimized/>
               <div className="p-6">
                 <h3 className="text-2xl font-black">{item.title}</h3>
                 <p className="mt-3 text-slate-300">{item.description}</p>
@@ -131,7 +145,18 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
             </article>
           ))}
         </div>
-        <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-6">
+        
+        {isMounted && showSwipeHint && (
+          <div className="mt-4 flex justify-center swipe-indicator">
+            <div className="flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-400/5 px-4 py-2">
+              <ChevronRight size={18} className="text-emerald-300" />
+              <span className="text-xs font-semibold text-emerald-300 tracking-wide">SWIPE</span>
+              <ChevronRight size={18} className="text-emerald-300" />
+            </div>
+          </div>
+        )}
+        
+        <div className="rounded-3xl border border-white/10 bg-slate-900/60 p-6 mt-6">
           <InfoBlock label="The Problem" value={project.problem} />
           <div className="mt-5">
             <InfoBlock label="System Architecture" value={project.architecture} />

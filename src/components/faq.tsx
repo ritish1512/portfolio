@@ -70,6 +70,7 @@ export function FAQ() {
         <div className="space-y-4">
           {faqData.map((faq, index) => (
             <button
+              aria-label='open faq'
               key={index}
               onClick={() => setOpenIndex(openIndex === index ? null : index)}
               className="w-full overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 transition hover:border-emerald-400/50"
@@ -112,18 +113,20 @@ export function FAQ() {
               value={customQuestion}
               onChange={(e) => setCustomQuestion(e.target.value)}
               placeholder="What would you like to know?"
+              aria-label='Add custom message'
               className="min-h-32 w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-emerald-400 focus:ring-4 focus:ring-emerald-400/10 sm:text-base sm:px-5 sm:py-4"
             />
             <button
               type="submit"
               disabled={!customQuestion.trim()}
+              aria-label="Send message"
               className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 px-5 py-3 text-sm font-bold text-slate-950 transition disabled:opacity-50 hover:bg-emerald-400 sm:px-6 sm:py-4 sm:text-base"
             >
               {submitted ? 'Opening WhatsApp...' : 'Ask on WhatsApp'} <Send size={18} />
             </button>
           </form>
 
-          <p className="mt-4 text-xs text-slate-500 sm:text-sm">
+          <p className="mt-4 text-xs text-slate-400 sm:text-sm">
             📱 Direct message to: +91 8072487339
           </p>
         </div>

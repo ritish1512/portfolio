@@ -16,3 +16,32 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+@keyframes swipe-hint {
+  0%, 100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(8px);
+  }
+}
+
+@keyframes swipe-fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.swipe-indicator {
+  animation: swipe-hint 2s ease-in-out infinite;
+}
+
+.swipe-indicator.fade-out {
+  animation: swipe-fade-out 0.5s ease-out forwards;
+}

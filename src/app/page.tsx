@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { FaGithub, FaLinkedin, FaInstagram, FaYoutubeSquare } from 'react-icons/fa'
 import { GrContact } from 'react-icons/gr'
+import Image from "next/image";
 import { ProjectShowcase } from "@/components/project-showcase";
 import {
   fallbackProjects,
@@ -49,7 +50,7 @@ async function getProjects() {
     problem,
     architecture,
     wins,
-    "image": coalesce(image.asset->url, imageUrl),
+    "image": coalesce(image.asset->url + "?w=1000&h=563&fit=crop&auto=format&q=80", imageUrl),
     "url": coalesce(url, "#contact")
   }`;
   const data = await fetchSanity<Project[]>(query);
@@ -125,7 +126,16 @@ export default async function Home() {
 
         <div className="mt-10 w-full lg:mt-0 lg:w-5/12">
           <div className="relative rounded-4xl border border-white/10 bg-slate-900/70 p-5 shadow-2xl shadow-black/40 sm:p-6 md:p-8">
-            <div className="aspect-4/5 w-full rounded-3xl bg-[url('/logo-square.png')] bg-cover bg-center" />
+            <div className="aspect-4/5 w-full rounded-3xl overflow-hidden bg-slate-800">
+              <Image
+                src="/logo-square.png"
+                alt="Ritish Logo"
+                width={400}
+                height={500}
+                className="h-full w-full object-cover"
+                priority
+              />
+            </div>
             <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 rounded-2xl border border-emerald-400/30 bg-slate-950/90 p-4 backdrop-blur w-max md:left-25 md:-bottom-10 md:p-5">
               <p className="text-2xl font-black text-emerald-300 sm:text-3xl md:text-4xl">Ritish</p>
               <p className="mt-1 text-sm text-slate-400 sm:text-base">Value-driven, versatile, pragmatic</p>
@@ -250,7 +260,7 @@ export default async function Home() {
             </a>
           </div>
         </div>
-        <p className="mx-auto mt-8 max-w-7xl text-xs text-slate-500 sm:text-sm">
+        <p className="mx-auto mt-8 max-w-7xl text-xs text-slate-200 sm:text-sm">
           © 2026 Ritish. All rights reserved.
         </p>
       </footer>
@@ -262,7 +272,7 @@ function Metric({ value, label }: { value: string; label: string }) {
   return (
     <div>
       <p className="text-3xl font-black sm:text-4xl">{value}</p>
-      <p className="mt-2 text-sm font-semibold text-slate-500 sm:text-base">{label}</p>
+      <p className="mt-2 text-sm font-semibold text-slate-400 sm:text-base">{label}</p>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { Send, X } from "lucide-react";
-import { FormEvent, useMemo, useState } from "react";
+import { Send, X, ChevronRight } from "lucide-react";
+import { FormEvent, useMemo, useState, useEffect } from "react";
 import { buildWhatsAppUrl, type Service } from "./portfolio-data";
 
 const fieldClass =
@@ -10,7 +10,14 @@ const fieldClass =
 export function ServicesBooking({ services }: { services: Service[] }) {
   const [bookingService, setBookingService] = useState<Service | null>(null);
   const [bookingName, setBookingName] = useState("");
+  const [showSwipeHint, setShowSwipeHint] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const selectedService = services[0] ?? null;
+
+  useEffect(() => {
+    setIsMounted(true);
+    setShowSwipeHint(true);
+  }, []);
 
   const pricingTitles = useMemo(() => services.map((service) => service.title), [services]);
   const pricingBudgets = useMemo(
@@ -45,7 +52,7 @@ export function ServicesBooking({ services }: { services: Service[] }) {
       "Hi Ritish, I want to discuss a project.",
       `Client Name: ${String(form.get("name") ?? "").trim()}`,
       `Project Type: ${form.get("projectType")}`,
-      `Budget Range: ₹${form.get("budget")}/-`,
+      `Budget Range: ${form.get("budget")}`,
       `Expected Time: ${form.get("time")}`,
       `Message: ${String(form.get("message") ?? "").trim() || "No custom message"}`,
     ].join("\n");
@@ -69,32 +76,42 @@ export function ServicesBooking({ services }: { services: Service[] }) {
           </p>
         
         </div>
-        <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none] sm:-mx-5 sm:gap-5 sm:px-5 md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 md:pb-0 [&::-webkit-scrollbar]:hidden">
+        <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none] sm:-mx-5 sm:gap-5 sm:px-5 md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 md:pb-0 [&::-webkit-scrollbar]:hidden" onScroll={() => setShowSwipeHint(false)}>
           {services.map((service) => (
             <ServiceCard key={service._id} service={service} onBook={beginBooking} />
           ))}
         </div>
+        
+        {isMounted && showSwipeHint && (
+          <div className="mt-4 flex justify-center md:hidden swipe-indicator">
+            <div className="flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-400/5 px-4 py-2">
+              <ChevronRight size={18} className="text-emerald-300" />
+              <span className="text-xs font-semibold text-emerald-300 tracking-wide">SWIPE</span>
+              <ChevronRight size={18} className="text-emerald-300" />
+            </div>
+          </div>
+        )}
       </section>
 
       <section id="contact" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 md:px-8 lg:px-10 lg:py-24">
         <div className="grid overflow-hidden rounded-4xl bg-emerald-400 text-slate-950 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="bg-white p-6 sm:p-8 md:p-10 lg:p-12">
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-emerald-600 sm:text-sm">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-emerald-700 sm:text-sm">
               Start your build
             </p>
             <form onSubmit={submitContact} className="mt-8 space-y-4">
-              <input className={fieldClass} name="name" required placeholder="Client Name" type="text" suppressHydrationWarning />
-              <select className={fieldClass} name="projectType" defaultValue={selectedService?.title || ""} suppressHydrationWarning>
+              <input className={fieldClass} name="name" aria-label="enter your name" required placeholder="Client Name" type="text" suppressHydrationWarning />
+              <select aria-label="project" className={fieldClass} name="projectType" defaultValue={selectedService?.title || ""} suppressHydrationWarning>
                 {pricingTitles.map((title) => (
-                  <option key={title}>{title}</option>
+                  <option key={title} aria-label={title}>{title}</option>
                 ))}
               </select>
-              <select className={fieldClass} name="budget" defaultValue={selectedService?.price || ""} suppressHydrationWarning>
+              <select aria-label="budget" className={fieldClass} name="budget" defaultValue={selectedService?.price || ""} suppressHydrationWarning>
                 {pricingBudgets.map((budget) => (
-                  <option key={budget}>₹{budget}/-</option>
+                  <option key={budget} aria-label={budget}>₹{budget}/-</option>
                 ))}
               </select>
-              <select className={fieldClass} name="time" defaultValue="Within 1 Week" suppressHydrationWarning>
+              <select className={fieldClass} name="time" aria-label="time period" defaultValue="Within 1 Week" suppressHydrationWarning>
                 <option>Within 1 Week</option>
                 <option>1-2 Weeks</option>
                 <option>Flexible</option>
@@ -103,8 +120,9 @@ export function ServicesBooking({ services }: { services: Service[] }) {
                 className={`${fieldClass} min-h-32 resize-none`}
                 name="message"
                 placeholder="Custom Message"
+                aria-label="custom message"
               />
-              <button className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-950 px-6 py-4 text-sm font-black text-white transition hover:bg-emerald-600 sm:text-base sm:px-7 sm:py-5" suppressHydrationWarning>
+              <button aria-label="send form" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-slate-950 px-6 py-4 text-sm font-black text-white transition hover:bg-emerald-600 sm:text-base sm:px-7 sm:py-5" suppressHydrationWarning>
                 Send on WhatsApp <Send size={18} />
               </button>
             </form>
@@ -144,18 +162,19 @@ export function ServicesBooking({ services }: { services: Service[] }) {
                 <X size={20} />
               </button>
             </div>
-            <label className="mt-8 block text-sm font-semibold text-slate-300" htmlFor="booking-name">
+            <label aria-label="name" className="mt-8 block text-sm font-semibold text-slate-300" htmlFor="booking-name">
               Your name
             </label>
             <input
               id="booking-name"
               required
+              aria-label="name"
               value={bookingName}
               onChange={(event) => setBookingName(event.target.value)}
               className="mt-3 w-full rounded-xl border border-white/10 bg-slate-950 px-4 py-3 text-white outline-none transition focus:border-emerald-300 focus:ring-4 focus:ring-emerald-300/10"
               placeholder="Client Name"
             />
-            <button className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-400 px-6 py-4 text-sm font-black text-slate-950 transition hover:bg-emerald-300">
+            <button aria-label="send button" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-400 px-6 py-4 text-sm font-black text-slate-950 transition hover:bg-emerald-300">
               Continue to WhatsApp <Send size={18} />
             </button>
           </form>
@@ -206,7 +225,9 @@ function ServiceCard({ service, onBook }: { service: Service; onBook: (service: 
       </div>
       <button
         onClick={() => onBook(service)}
-        className="mt-auto w-full rounded-xl bg-emerald-500 px-5 py-4 text-sm font-black text-white transition hover:bg-emerald-400 hover:text-slate-950 sm:px-6 sm:py-4 sm:text-base"
+        aria-label="book service"
+        suppressHydrationWarning
+        className="mt-auto w-full rounded-xl bg-emerald-500 px-5 py-4 text-sm font-black text-black transition hover:bg-emerald-400 hover:text-slate-950 sm:px-6 sm:py-4 sm:text-base"
       >
         Book this Service
       </button>

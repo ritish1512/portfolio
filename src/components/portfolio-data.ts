@@ -43,7 +43,7 @@ export const fallbackProjects: Project[] = [
     architecture: "Event-driven services, queueing and idempotent processors.",
     wins: ["60% faster processing", "Observability + SLOs", "Role-based workflows"],
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=85",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80",
     url: "#contact",
   },
   {
@@ -54,7 +54,7 @@ export const fallbackProjects: Project[] = [
     architecture: "Next.js workspace, serverless actions and Sanity-managed content.",
     wins: ["Lead intake automation", "Reusable workflow modules", "Executive reporting"],
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=85",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80",
     url: "#contact",
   },
   {
@@ -65,7 +65,7 @@ export const fallbackProjects: Project[] = [
     architecture: "Static React UI, Sanity content source and client-side WhatsApp handoff.",
     wins: ["Zero backend latency", "Editable packages", "Mobile-first conversion path"],
     image:
-      "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1400&q=85",
+      "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1000&q=80",
     url: "#services",
   },
 ];
