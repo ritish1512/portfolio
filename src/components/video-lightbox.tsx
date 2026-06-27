@@ -25,13 +25,12 @@ export function VideoLightbox() {
         suppressHydrationWarning
       >
         <Image
-          src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=75"
+          src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=75"
           alt="Developer tutorial preview"
-          width={800}
-          height={450}
+          width={700}
+          height={394}
           className="h-full w-full object-cover opacity-80 transition duration-500 group-hover:scale-105"
-          loading="eager"
-          unoptimized
+          priority
         />
         <span className="absolute inset-0 bg-slate-950/20" />
         <span className="absolute left-1/2 top-1/2 grid size-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-slate-950 shadow-2xl transition group-hover:scale-110">

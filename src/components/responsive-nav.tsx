@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import type { ReactNode } from 'react'
 import { Menu, X } from 'lucide-react'
+import Image from 'next/image'
 import { FaGithub, FaLinkedin, FaInstagram, FaYoutubeSquare } from 'react-icons/fa'
 import { GrContact } from 'react-icons/gr'
 
@@ -21,7 +22,16 @@ export function ResponsiveNav() {
   return (
     <div className="relative mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-4 sm:px-6 md:px-8">
       <a href="#hero" className="flex items-center gap-3 font-semibold tracking-tight text-white text-sm sm:text-base">
-        <div className="aspect-4/5 h-9 w-9 rounded-3xl border border-emerald-400/60 bg-[url('/logo-square.png')] bg-cover bg-center" />
+        <div className="relative h-9 w-9 rounded-3xl border border-emerald-400/60 overflow-hidden">
+          <Image
+            src="/logo-square.png"
+            alt="Ritish Logo"
+            width={36}
+            height={45}
+            className="h-full w-full object-cover"
+            priority
+          />
+        </div>
         Ritish Builds
       </a>
 

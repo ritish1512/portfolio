@@ -99,9 +99,9 @@ export const testimonials: Testimonial[] = [
     quote:
       "Ritish turned our scattered requirements into a fast, polished website that customers understood immediately. The WhatsApp booking flow started bringing leads the first week.",
     avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80",
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=80",
     photo:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80",
   },
   {
     name: "Mariya John",
@@ -110,9 +110,9 @@ export const testimonials: Testimonial[] = [
     quote:
       "The project felt premium from day one. We needed automation without complexity, and he shipped a dashboard our team could actually use.",
     avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80",
     photo:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80",
   },
 ];
 

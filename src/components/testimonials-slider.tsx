@@ -19,7 +19,7 @@ export function TestimonialsSlider({ testimonials }: { testimonials: Testimonial
     <section className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-18 sm:px-6 sm:py-20 md:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:px-10 lg:py-24">
       <div className="relative mx-auto w-full max-w-md">
         <div className="aspect-[0.86] overflow-hidden rounded-bl-[9rem] rounded-br-2xl rounded-tl-2xl rounded-tr-[9rem] bg-sky-200">
-          <Image src={testimonial.photo} alt={testimonial.name} width={700} height={700} className="h-full w-full object-cover" loading="eager" unoptimized/>
+          <Image src={testimonial.photo} alt={testimonial.name} width={550} height={550} className="h-full w-full object-cover" priority/>
         </div>
       </div>
       <div>
@@ -40,7 +40,7 @@ export function TestimonialsSlider({ testimonials }: { testimonials: Testimonial
           {testimonial.quote}
         </p>
         <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
-          <Image src={testimonial.avatar} width={200} height={200} alt={testimonial.name} className="h-16 w-16 rounded-full object-cover sm:h-20 sm:w-20" loading="lazy"/>
+          <Image src={testimonial.avatar} width={80} height={80} alt={testimonial.name} className="h-16 w-16 rounded-full object-cover sm:h-20 sm:w-20" loading="lazy"/>
           <div>
             <p className="text-xl font-black sm:text-2xl">{testimonial.name}</p>
             <p className="text-sm text-slate-400 sm:text-base">
