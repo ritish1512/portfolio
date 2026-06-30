@@ -4,6 +4,7 @@ import { Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { UIEvent, useState, useEffect } from "react";
 import type { Project } from "./portfolio-data";
 import Image from "next/image";
+import Link from "next/link";
 
 export function ProjectShowcase({ projects }: { projects: Project[] }) {
   const [activeProject, setActiveProject] = useState(0);
@@ -137,10 +138,20 @@ export function ProjectShowcase({ projects }: { projects: Project[] }) {
               key={item._id}
               className="w-[88vw] shrink-0 snap-center overflow-hidden rounded-3xl border border-white/10 bg-slate-900"
             >
+              <div className="relative">
               <Image src={item.image} width={800} height={400} alt={item.title} className="h-72 w-full object-cover" loading="lazy" unoptimized/>
+              <Link
+                href={project.url}
+                target="_blank"
+                className="rounded-xl bg-emerald-500 px-5 py-3 font-black text-slate-950 transition hover:bg-emerald-300"
+              >
+                View App
+              </Link>
+              </div>
               <div className="p-6">
                 <h3 className="text-2xl font-black">{item.title}</h3>
                 <p className="mt-3 text-slate-300">{item.description}</p>
+                
               </div>
             </article>
           ))}

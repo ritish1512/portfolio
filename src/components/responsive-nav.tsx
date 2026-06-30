@@ -74,6 +74,7 @@ export function ResponsiveNav() {
         onClick={() => setOpen((current) => !current)}
         className={`grid h-10 w-10 place-items-center rounded-full border border-white/10 text-slate-300 transition hover:border-emerald-400 hover:text-white md:hidden ${open ? ' rotate-90' : 'rotate-0'} transition-all duration-300`}
         aria-label={open ? 'Close menu' : 'Open menu'}
+        suppressHydrationWarning
       >
         {open ? <X size={18} /> : <Menu size={18} />}
       </button>
