@@ -165,11 +165,11 @@ export default async function Home() {
             Technical Deep Dives
           </h2>
           <p className="mt-6 max-w-xl text-base leading-8 text-slate-400 sm:text-lg md:text-xl">
-            I teach the same programming strategy I use in production: design the workflow, remove
-            friction, then ship a fast interface that keeps business moving.
+            I write production-grade, highly maintainable full-stack applications with strict TypeScript typing,
+             optimized MongoDB schemas, and scalable architecture designed for long-term business growth.
           </p>
           <p className="mt-4 max-w-xl text-base leading-8 text-slate-400 sm:text-lg md:text-xl">
-            It may be a proof of i solve instead of just build
+            Writing Bug free code means I can focus on building features that matter to your business, and not waste time fixing issues that arise from poor code quality.
           </p>
           <div className="mt-10 flex flex-wrap gap-6 md:gap-8">
             <Metric value="10k+" label="Subscribers" />

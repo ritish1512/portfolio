@@ -112,8 +112,8 @@ export function ServicesBooking({ services }: { services: Service[] }) {
                 ))}
               </select>
               <select className={fieldClass} name="time" aria-label="time period" defaultValue="Within 1 Week" suppressHydrationWarning>
-                <option>Within 1 Week</option>
-                <option>1-2 Weeks</option>
+                <option>Within 3 Week</option>
+                <option>4-6 Weeks</option>
                 <option>Flexible</option>
               </select>
               <textarea
